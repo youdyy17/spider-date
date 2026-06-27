@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Matches the original page background that shows through any overscroll. */
+  body {
+    background: #05060f;
+  }
+}
+
+/* When printing, show only the ticket — hide the scene, buttons and actions. */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .ticket-printable,
+  .ticket-printable * {
+    visibility: visible;
+  }
+
+  .ticket-printable {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-shadow: none;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
