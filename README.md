@@ -39,7 +39,7 @@ Open [`src/config.js`](src/config.js) to personalize the page:
 
 | Setting        | Default                | Description                                      |
 | -------------- | ---------------------- | ------------------------------------------------ |
-| `petName`      | `'Amra'`               | Name shown in the headline.                      |
+| `Name`      | `'Amra'`               | Name shown in the headline.                      |
 | `movieDate`    | `'July 30'`            | Date shown throughout the page.                  |
 | `runawayNo`    | `true`                 | Whether the "NO" button dodges on hover/click.   |
 | `confettiCount`| `300`                  | Number of confetti pieces on acceptance (80–500).|
