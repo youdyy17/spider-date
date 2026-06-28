@@ -4,8 +4,10 @@ import { config, DODGE_MESSAGES } from './config.js';
 import gfFace from './assets/amra_face.jpg';
 import dayLight from './assets/dayLight.mp3';
 import { useConfetti } from './hooks/useConfetti.js';
+import { useImagePreloader } from './hooks/useImagePreloader.js';
 import { makeTicketSerial } from './lib/ticket.js';
 
+import LoadingSpinner from './components/LoadingSpinner.jsx';
 import StartScreen from './components/StartScreen.jsx';
 import StarField from './components/StarField.jsx';
 import SpiderWeb from './components/SpiderWeb.jsx';
@@ -17,6 +19,9 @@ import MovieDateForm from './components/MovieDateForm.jsx';
 import MovieTicket from './components/MovieTicket.jsx';
 import QuoteFooter from './components/QuoteFooter.jsx';
 import ConfettiCanvas from './components/ConfettiCanvas.jsx';
+
+/** Every image that must be fully decoded before the scene is revealed. */
+const PRELOAD_IMAGES = [gfFace];
 
 /** Ramp an audio element's volume from 0 to 1 over ~1.2s for a smooth start. */
 function fadeInVolume(audio) {
@@ -40,6 +45,9 @@ export default function App() {
   const [ticket, setTicket] = useState(null);
   const [message, setMessage] = useState(null);
   const [noOffset, setNoOffset] = useState({ x: 0, y: 0 });
+
+  // Hold the scene back until every required image is fetched and decoded.
+  const imagesReady = useImagePreloader(PRELOAD_IMAGES);
 
   const canvasRef = useRef(null);
   const audioRef = useRef(null);
@@ -105,12 +113,15 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-night-sky font-nunito">
-      {/* Background ambiance — always present, even on the Start screen. */}
+      {/* Background ambiance — always present, even while loading. */}
       <StarField />
 
-      {!started && <StartScreen onStart={handleStart} />}
+      {/* Loading gate: no UI or content until all images are decoded. */}
+      {!imagesReady && <LoadingSpinner />}
 
-      {started && (
+      {imagesReady && !started && <StartScreen onStart={handleStart} />}
+
+      {imagesReady && started && (
         <>
           {/* Atmosphere — fades in as a group once the scene is revealed. */}
           <div className="animate-fade-in-slow">
