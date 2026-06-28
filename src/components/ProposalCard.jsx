@@ -31,7 +31,7 @@ export default function ProposalCard({ movieDate, message, noOffset, onAccept, o
       </h2>
 
       <p className={`mx-auto mt-[18px] max-w-[460px] ${type.bodyMd} text-[#3a3320] [text-wrap:pretty]`}>
-        Bong will pay snack and ticket 100% promise and all
+        I will pay snack and ticket 100% promise and all
         I need is my favorite person beside me, Amra!.
       </p>
 
