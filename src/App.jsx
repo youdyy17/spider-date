@@ -54,6 +54,12 @@ export default function App() {
   const audioRef = useRef(null);
   const launchConfetti = useConfetti(canvasRef, confettiCount);
 
+  // Warm up the /api/notify serverless function on page load so it's already
+  // running by the time the form is submitted, avoiding a cold-start delay.
+  useEffect(() => {
+    fetch('/api/notify').catch(() => {});
+  }, []);
+
   // Prepare the (silent) audio up front; it starts on the Start gesture.
   useEffect(() => {
     const audio = new Audio(dayLight);

@@ -17,8 +17,14 @@ function escapeHtml(value) {
 }
 
 export default async function handler(req, res) {
+  // GET is used as a warm-up ping on page load to avoid cold-start delay on
+  // the real POST when the form is submitted.
+  if (req.method === 'GET') {
+    return res.status(200).json({ ok: true });
+  }
+
   if (req.method !== 'POST') {
-    res.setHeader('Allow', 'POST');
+    res.setHeader('Allow', 'GET, POST');
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
