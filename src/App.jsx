@@ -138,13 +138,22 @@ export default function App() {
 
   const handleSubmit = useCallback(
     (data) => {
-      setTicket({
+      const ticketData = {
         ...data,
         movie: movieTitle,
         guest: guestName,
         serial: makeTicketSerial(),
-      });
+      };
+      setTicket(ticketData);
       setStep('ticket');
+
+      // Notify via Telegram (serverless /api/notify). Fire-and-forget so a slow
+      // or failed request never blocks showing the ticket.
+      fetch('/api/notify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(ticketData),
+      }).catch(() => {});
     },
     [movieTitle, guestName],
   );

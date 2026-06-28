@@ -149,7 +149,7 @@ export default function MovieDateForm({ onSubmit }) {
           className={`w-full cursor-pointer rounded-[12px] border-[3px] border-[#08080f] bg-white px-[14px] py-[11px] ${type.bodyBase} text-[#2a2516] shadow-[3px_3px_0_rgba(8,8,15,.25)] outline-none focus:border-[#2b59c3]`}
         />
         <p className={`mt-1.5 ${type.bodyHelper} text-[#7a6f57]`}>
-          Showings start July 30 — earlier dates are sealed by Sastra-Film. 🕸️
+          Showings start July 30 — earlier dates are sealed by Petter Parker. 🕸️
         </p>
       </div>
 
