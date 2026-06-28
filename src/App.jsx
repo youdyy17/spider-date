@@ -67,6 +67,58 @@ export default function App() {
     };
   }, []);
 
+  // Pause background music when the page is hidden — tab switch, window
+  // minimize, phone lock, or switching to another app all fire this — and
+  // resume when the user comes back. Only audio the user had actually started
+  // is resumed.
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return undefined;
+
+    // Tracks whether music was playing when the page was hidden, so we don't
+    // start music the user never began (or had intentionally paused).
+    let resumeOnReturn = false;
+
+    const pauseForHidden = () => {
+      if (!audio.paused) {
+        resumeOnReturn = true;
+        audio.pause();
+      }
+    };
+
+    const resume = () => {
+      audio.volume = 0;
+      audio.play().then(() => fadeInVolume(audio)).catch(() => {
+        // Autoplay was blocked on return — wait for an explicit user gesture.
+        const onGesture = () => {
+          window.removeEventListener('pointerdown', onGesture);
+          window.removeEventListener('keydown', onGesture);
+          audio.play().then(() => fadeInVolume(audio)).catch(() => {});
+        };
+        window.addEventListener('pointerdown', onGesture);
+        window.addEventListener('keydown', onGesture);
+      });
+    };
+
+    const handleVisibility = () => {
+      if (document.hidden) {
+        pauseForHidden();
+      } else if (resumeOnReturn) {
+        resumeOnReturn = false;
+        resume();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibility);
+    // iOS Safari doesn't always fire visibilitychange on app switch/lock.
+    window.addEventListener('pagehide', pauseForHidden);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibility);
+      window.removeEventListener('pagehide', pauseForHidden);
+    };
+  }, []);
+
   const handleStart = useCallback(() => {
     setStarted(true);
     if (!config.music) return;
