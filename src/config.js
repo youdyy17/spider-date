@@ -17,7 +17,7 @@ export const config = {
   /** Movie title printed on the form question and the final ticket. */
   movieTitle: 'Spider-Man: Brand New Day',
   /** Guest name printed on the ticket. */
-  guestName: 'My Amarino❤️',
+  guestName: 'Amarino❤️',
   /** Earliest selectable date (YYYY-MM-DD). Anything before this is disabled. */
   minDate: '2026-07-30',
   /** Cinemas offered in the booking dropdown. */
