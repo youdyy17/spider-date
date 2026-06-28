@@ -133,7 +133,7 @@ export default function MovieDateForm({ onSubmit }) {
           ))}
         </div>
         <p className={`mt-1.5 ${type.bodyHelper} text-[#7a6f57]`}>
-          Exact showtimes TBD — we'll lock in the time once we swings into cinemas! 🕸️
+          Exact showtimes TBD — we'll lock in the time once we get into cinemas! 🕸️
         </p>
       </div>
 
