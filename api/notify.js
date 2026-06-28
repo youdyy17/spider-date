@@ -35,7 +35,7 @@ export default async function handler(req, res) {
   }
 
   const text =
-    `🎟️ <b>New movie date booked!</b>\n\n` +
+    `🎟️ <b>New movie date</b>\n\n` +
     `👤 <b>Guest:</b> ${escapeHtml(guest) || '—'}\n` +
     `📍 <b>Theater:</b> ${escapeHtml(theater)}\n` +
     `⏰ <b>Showtime:</b> ${escapeHtml(time)}\n` +
