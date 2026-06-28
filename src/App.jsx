@@ -8,6 +8,7 @@ import { useImagePreloader } from './hooks/useImagePreloader.js';
 import { makeTicketSerial } from './lib/ticket.js';
 
 import LoadingSpinner from './components/LoadingSpinner.jsx';
+import { type } from './theme/typography.js';
 import StartScreen from './components/StartScreen.jsx';
 import StarField from './components/StarField.jsx';
 import SpiderWeb from './components/SpiderWeb.jsx';
@@ -155,11 +156,11 @@ export default function App() {
 
             {step === 'proposal' && (
               <>
-                <h1 className="mt-[18px] animate-float-up font-bangers text-[clamp(46px,11vw,104px)] leading-[0.96] tracking-[2px] text-white [animation-delay:250ms] [text-shadow:4px_4px_0_#e11b22,-2px_-2px_0_#2b59c3,6px_6px_0_#08080f]">
+                <h1 className={`mt-[18px] animate-float-up ${type.heroHeading} text-white [animation-delay:250ms]`}>
                   Hey {petName}... 🕷️❤️
                 </h1>
 
-                <p className="mt-5 max-w-[560px] animate-float-up font-nunito text-[clamp(17px,2.6vw,23px)] font-bold italic text-[#e7ecff] [animation-delay:400ms] [text-shadow:0_2px_8px_rgba(0,0,0,.6)] [text-wrap:pretty]">
+                <p className={`mt-5 max-w-[560px] animate-float-up ${type.bodyLg} text-[#e7ecff] [animation-delay:400ms] [text-wrap:pretty]`}>
                   There's a brand new day coming on {movieDate}... and I can go with thyrak, panha but if i can go with you 🥹.
                 </p>
 

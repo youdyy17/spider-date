@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 
 import { config } from '../config.js';
 import { formatTicketDate } from '../lib/ticket.js';
+import { type } from '../theme/typography.js';
 
 /** Sentinel option that reveals the free-text snack input. */
 const SNACK_OTHER = 'Other (type your own)';
@@ -17,7 +18,7 @@ function Chip({ active, onClick, children }) {
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`cursor-pointer rounded-full border-[3px] border-[#08080f] px-[18px] py-[9px] font-nunito text-[15px] font-extrabold tracking-[0.3px] transition-all duration-150 ease-out hover:-translate-y-[2px] active:translate-y-[1px] ${
+      className={`cursor-pointer rounded-full border-[3px] border-[#08080f] px-[18px] py-[9px] ${type.chip} transition-all duration-150 ease-out hover:-translate-y-[2px] active:translate-y-[1px] ${
         active
           ? 'bg-[linear-gradient(160deg,#ff2d36,#c20f16)] text-white shadow-[4px_4px_0_#08080f] ring-2 ring-[#2b59c3] ring-offset-2 ring-offset-[#fff8ef]'
           : 'bg-white text-[#2a2516] shadow-[3px_3px_0_rgba(8,8,15,.35)] hover:bg-[#fff3df]'
@@ -31,7 +32,7 @@ function Chip({ active, onClick, children }) {
 /** Small uppercase section heading inside the form card. */
 function FieldLabel({ children }) {
   return (
-    <span className="mb-2 block font-bangers text-[19px] tracking-[1.5px] text-[#2b59c3]">
+    <span className={`mb-2 block ${type.fieldLabel} text-[#2b59c3]`}>
       {children}
     </span>
   );
@@ -79,25 +80,25 @@ export default function MovieDateForm({ onSubmit }) {
       onSubmit={handleSubmit}
       className="relative mt-11 w-full max-w-[600px] -rotate-1 animate-panel-pop rounded-[20px] border-[5px] border-[#08080f] bg-[#fff8ef] bg-[radial-gradient(rgba(225,27,34,.07)_1.4px,transparent_1.5px)] bg-[length:16px_16px] px-[26px] pb-[34px] pt-[40px] text-left shadow-[11px_11px_0_rgba(0,0,0,.45)] sm:px-[30px]"
     >
-      <div className="absolute -top-4 left-1/2 -translate-x-1/2 -rotate-3 rounded-[8px] border-[3px] border-[#08080f] bg-[#2b59c3] px-[18px] py-[5px] font-bangers text-[15px] tracking-[1.5px] text-white shadow-[3px_3px_0_rgba(0,0,0,.35)]">
+      <div className={`absolute -top-4 left-1/2 -translate-x-1/2 -rotate-3 rounded-[8px] border-[3px] border-[#08080f] bg-[#2b59c3] px-[18px] py-[5px] ${type.panelBadge} text-white shadow-[3px_3px_0_rgba(0,0,0,.35)]`}>
         BOOK OUR DATE
       </div>
 
       {/* Spider-Man quote */}
       <div className="mb-7 rounded-[14px] border-[3px] border-dashed border-[#e11b22]/50 bg-white/60 px-[18px] py-4 text-center">
-        <p className="font-nunito text-[13.5px] font-bold text-[#7a2b2f]">
+        <p className={`${type.bodyChip} text-[#7a2b2f]`}>
           🕷️ Spider-Man: <span className="italic">With great power comes great responsibility…</span>
         </p>
-        <p className="mt-1 font-nunito text-[13.5px] font-bold text-[#2b59c3]">
+        <p className={`mt-1 ${type.bodyChip} text-[#2b59c3]`}>
           Youdy: And great responsibility includes taking you to the movies 😂
         </p>
-        <p className="mt-2.5 font-bangers text-[clamp(17px,3.4vw,21px)] leading-[1.15] tracking-[0.5px] text-[#e11b22]">
+        <p className={`mt-2.5 ${type.formQuote} text-[#e11b22]`}>
           &ldquo;With great power comes great responsibility… and great responsibility includes
           taking you to the movies.&rdquo;
         </p>
       </div>
 
-      <h2 className="mb-6 font-bangers text-[clamp(24px,5vw,34px)] leading-[1.05] tracking-[1px] text-[#e11b22] [text-shadow:2px_2px_0_rgba(8,8,15,.15)]">
+      <h2 className={`mb-6 ${type.cardHeadingMd} text-[#e11b22]`}>
         Plan our day for <span className="text-[#2b59c3]">{movieTitle}</span> 🍿🕸️
       </h2>
 
@@ -108,7 +109,7 @@ export default function MovieDateForm({ onSubmit }) {
           value={theater}
           onChange={(e) => setTheater(e.target.value)}
           required
-          className="w-full cursor-pointer rounded-[12px] border-[3px] border-[#08080f] bg-white px-[14px] py-[12px] font-nunito text-[15px] font-bold text-[#2a2516] shadow-[3px_3px_0_rgba(8,8,15,.25)] outline-none focus:border-[#2b59c3]"
+          className={`w-full cursor-pointer rounded-[12px] border-[3px] border-[#08080f] bg-white px-[14px] py-[12px] ${type.bodyBase} text-[#2a2516] shadow-[3px_3px_0_rgba(8,8,15,.25)] outline-none focus:border-[#2b59c3]`}
         >
           <option value="" disabled>
             Choose a cinema…
@@ -131,7 +132,7 @@ export default function MovieDateForm({ onSubmit }) {
             </Chip>
           ))}
         </div>
-        <p className="mt-1.5 font-nunito text-[12.5px] font-bold italic text-[#7a6f57]">
+        <p className={`mt-1.5 ${type.bodyHelper} text-[#7a6f57]`}>
           Exact showtimes TBD — we'll lock in the time once we swings into cinemas! 🕸️
         </p>
       </div>
@@ -145,9 +146,9 @@ export default function MovieDateForm({ onSubmit }) {
           min={minDate}
           onChange={(e) => setDate(e.target.value)}
           required
-          className="w-full cursor-pointer rounded-[12px] border-[3px] border-[#08080f] bg-white px-[14px] py-[11px] font-nunito text-[15px] font-bold text-[#2a2516] shadow-[3px_3px_0_rgba(8,8,15,.25)] outline-none focus:border-[#2b59c3]"
+          className={`w-full cursor-pointer rounded-[12px] border-[3px] border-[#08080f] bg-white px-[14px] py-[11px] ${type.bodyBase} text-[#2a2516] shadow-[3px_3px_0_rgba(8,8,15,.25)] outline-none focus:border-[#2b59c3]`}
         />
-        <p className="mt-1.5 font-nunito text-[12.5px] font-bold italic text-[#7a6f57]">
+        <p className={`mt-1.5 ${type.bodyHelper} text-[#7a6f57]`}>
           Showings start July 30 — earlier dates are sealed by Sastra-Film. 🕸️
         </p>
       </div>
@@ -159,7 +160,7 @@ export default function MovieDateForm({ onSubmit }) {
           value={snackChoice}
           onChange={(e) => setSnackChoice(e.target.value)}
           required
-          className="w-full cursor-pointer rounded-[12px] border-[3px] border-[#08080f] bg-white px-[14px] py-[12px] font-nunito text-[15px] font-bold text-[#2a2516] shadow-[3px_3px_0_rgba(8,8,15,.25)] outline-none focus:border-[#2b59c3]"
+          className={`w-full cursor-pointer rounded-[12px] border-[3px] border-[#08080f] bg-white px-[14px] py-[12px] ${type.bodyBase} text-[#2a2516] shadow-[3px_3px_0_rgba(8,8,15,.25)] outline-none focus:border-[#2b59c3]`}
         >
           <option value="" disabled>
             Choose a snack combo…
@@ -188,7 +189,7 @@ export default function MovieDateForm({ onSubmit }) {
               required={isOtherSnack}
               aria-hidden={!isOtherSnack}
               tabIndex={isOtherSnack ? 0 : -1}
-              className="w-full rounded-[12px] border-[3px] border-dashed border-[#e11b22] bg-white px-[14px] py-[11px] font-nunito text-[15px] font-bold text-[#2a2516] shadow-[3px_3px_0_rgba(8,8,15,.25)] outline-none placeholder:font-normal placeholder:italic placeholder:text-[#b4a98c] focus:border-[#2b59c3]"
+              className={`w-full rounded-[12px] border-[3px] border-dashed border-[#e11b22] bg-white px-[14px] py-[11px] ${type.bodyInput} text-[#2a2516] shadow-[3px_3px_0_rgba(8,8,15,.25)] outline-none placeholder:text-[#b4a98c] focus:border-[#2b59c3]`}
             />
           </div>
         </div>
@@ -203,20 +204,20 @@ export default function MovieDateForm({ onSubmit }) {
           rows={3}
           maxLength={220}
           placeholder="Whisper something for the ticket…"
-          className="w-full resize-none rounded-[12px] border-[3px] border-[#08080f] bg-white px-[14px] py-[11px] font-nunito text-[15px] font-bold text-[#2a2516] shadow-[3px_3px_0_rgba(8,8,15,.25)] outline-none placeholder:font-normal placeholder:italic placeholder:text-[#b4a98c] focus:border-[#2b59c3]"
+          className={`w-full resize-none rounded-[12px] border-[3px] border-[#08080f] bg-white px-[14px] py-[11px] ${type.bodyInput} text-[#2a2516] shadow-[3px_3px_0_rgba(8,8,15,.25)] outline-none placeholder:text-[#b4a98c] focus:border-[#2b59c3]`}
         />
       </div>
 
       <button
         type="submit"
         disabled={!ready}
-        className="mx-auto block cursor-pointer rounded-2xl border-4 border-[#08080f] bg-[linear-gradient(160deg,#ff2d36,#c20f16)] px-[30px] py-[14px] font-bangers text-[clamp(22px,5vw,28px)] tracking-[2px] text-white shadow-[6px_6px_0_#08080f] transition-transform duration-[120ms] ease-linear hover:-translate-y-[3px] hover:scale-105 active:translate-y-[2px] active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 disabled:hover:scale-100 enabled:animate-pulse-btn"
+        className={`mx-auto block cursor-pointer rounded-2xl border-4 border-[#08080f] bg-[linear-gradient(160deg,#ff2d36,#c20f16)] px-[30px] py-[14px] ${type.sectionBtn} text-white shadow-[6px_6px_0_#08080f] transition-transform duration-[120ms] ease-linear hover:-translate-y-[3px] hover:scale-105 active:translate-y-[2px] active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 disabled:hover:scale-100 enabled:animate-pulse-btn`}
       >
         Confirm Our Adventure 🕷️❤️
       </button>
 
       {!ready && (
-        <p className="mt-3 text-center font-nunito text-[12.5px] font-bold italic text-[#7a6f57]">
+        <p className={`mt-3 text-center ${type.bodyHelper} text-[#7a6f57]`}>
           Pick a theater, time, date &amp; snack to unlock your ticket.
         </p>
       )}

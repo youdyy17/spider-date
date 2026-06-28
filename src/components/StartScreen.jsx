@@ -1,3 +1,5 @@
+import { type } from '../theme/typography.js';
+
 /**
  * The opening screen: a single Start button centered over the night sky.
  * Pressing it (a real user gesture) reveals the scene and kicks off music.
@@ -11,7 +13,7 @@ export default function StartScreen({ onStart }) {
       <button
         type="button"
         onClick={onStart}
-        className="cursor-pointer animate-panel-pop-lg rounded-2xl border-4 border-[#08080f] bg-[linear-gradient(160deg,#ff2d36,#c20f16)] px-[46px] py-[18px] font-bangers text-[clamp(30px,7vw,46px)] tracking-[2.5px] text-white shadow-[7px_7px_0_#08080f] animate-pulse-btn transition-transform duration-[120ms] ease-linear hover:-translate-y-[3px] hover:scale-105 active:translate-y-[2px] active:scale-[0.97]"
+        className={`cursor-pointer animate-panel-pop-lg rounded-2xl border-4 border-[#08080f] bg-[linear-gradient(160deg,#ff2d36,#c20f16)] px-[46px] py-[18px] ${type.startBtn} text-white shadow-[7px_7px_0_#08080f] animate-pulse-btn transition-transform duration-[120ms] ease-linear hover:-translate-y-[3px] hover:scale-105 active:translate-y-[2px] active:scale-[0.97]`}
       >
         click to start
       </button>
