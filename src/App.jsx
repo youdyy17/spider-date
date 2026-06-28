@@ -116,12 +116,12 @@ export default function App() {
       {/* Background ambiance — always present, even while loading. */}
       <StarField />
 
-      {/* Loading gate: no UI or content until all images are decoded. */}
-      {!imagesReady && <LoadingSpinner />}
+      {!started && <StartScreen onStart={handleStart} />}
 
-      {imagesReady && !started && <StartScreen onStart={handleStart} />}
+      {/* After Start is clicked, hold the scene until all images are decoded. */}
+      {started && !imagesReady && <LoadingSpinner />}
 
-      {imagesReady && started && (
+      {started && imagesReady && (
         <>
           {/* Atmosphere — fades in as a group once the scene is revealed. */}
           <div className="animate-fade-in-slow">
